@@ -1,0 +1,5 @@
+{
+  "compilerOptions": { "target": "ES2022", "module": "ESNext", "moduleResolution": "Bundler", "strict": true, "skipLibCheck": true, "allowImportingTsExtensions": true, "resolveJsonModule": true, "esModuleInterop": true, "lib": ["ES2022", "DOM"], "types": ["node", "vite/client"] },
+  "include": ["content/.vitepress/**/*.ts", "content/.vitepress/**/*.vue", "content/**/*.ts", "content/**/*.vue"],
+  "exclude": ["node_modules", "content/.vitepress/cache", "content/.vitepress/dist"]
+}

@@ -1,0 +1,8 @@
+{
+  "name": "riku-blog",
+  "private": true,
+  "type": "module",
+  "scripts": { "dev": "vitepress dev content", "build": "vitepress build content", "preview": "vitepress preview content", "typecheck": "vue-tsc --noEmit" },
+  "dependencies": { "vitepress": "1.6.4", "vue": "^3.5.13" },
+  "devDependencies": { "typescript": "~5.7.3", "vue-tsc": "^2.2.0", "@types/node": "^22.10.0" }
+}
