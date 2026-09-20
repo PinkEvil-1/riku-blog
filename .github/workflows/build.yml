@@ -17,6 +17,7 @@ jobs:
       - run: npm ci
       - run: npm run typecheck
       - run: npm run build
+      - run: node --test tests/rss.test.mjs
       - uses: actions/upload-artifact@v4
         with:
           name: riku-blog-static

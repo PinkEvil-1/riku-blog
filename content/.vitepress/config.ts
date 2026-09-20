@@ -30,7 +30,7 @@ export default defineConfig({
       ...(page.frontmatter.cover ? [['meta', { property: 'og:image', content: new URL(page.frontmatter.cover, url).href }]] : [])]
   },
   themeConfig: {
-    nav: [{ text: '文章', link: '/' }, { text: '關於我', link: '/about' }, { text: 'RSS ↗', link: '/feed.xml' }],
+    nav: [{ text: '文章', link: '/' }, { text: '關於我', link: '/about' }, { text: 'RSS ↗', link: `${site.base}feed.xml` }],
     socialLinks: [{ icon: 'github', link: site.github }],
     search: { provider: 'local', options: { locales: { root: { translations: { button: { buttonText: '搜尋文章', buttonAriaLabel: '搜尋文章' }, modal: { noResultsText: '找不到相關文章', resetButtonTitle: '清除搜尋', footer: { selectText: '選擇', navigateText: '切換', closeText: '關閉' } } } } } } },
     outline: { level: [2, 3], label: '文章目錄' },
