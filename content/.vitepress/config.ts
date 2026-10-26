@@ -36,7 +36,7 @@ export default defineConfig({
     outline: { level: [2, 3], label: '文章目錄' },
     sidebar: [],
     docFooter: { prev: '上一篇', next: '下一篇' },
-    footer: { message: site.description, copyright: '© Riku / Brian' }
+    footer: { message: site.description, copyright: `© ${site.author}` }
   },
   async buildEnd(config) {
     const posts = await createContentLoader('posts/*.md').load()

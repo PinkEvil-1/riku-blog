@@ -59,8 +59,8 @@ onUnmounted(() => { media?.removeEventListener('change', applyMode); window.remo
     <template #home-hero-before>
       <main class="blog-home">
         <section class="intro">
-          <div><p class="eyebrow">PERSONAL LOG / {{ site.author }}</p><h1>把探索的過程，<br>寫成下一步的<span>線索。</span></h1><p class="intro-copy">{{ site.description }}<br>歡迎來到 Riku 的個人筆記。</p><div class="intro-links"><a class="primary-link" href="#articles">閱讀文章 ↓</a><a :href="withBase('/about.html')">關於我 ↗</a></div></div>
-          <div class="identity"><span class="mono">~/riku-blog</span><div class="monogram">R<span>.</span></div><div class="identity-bottom"><span>Riku / Brian</span><span class="mono">NOTES & IDEAS</span></div></div>
+          <div><p class="eyebrow">PERSONAL LOG / {{ site.author }}</p><h1>把探索的過程，<br>寫成下一步的<span>線索。</span></h1><p class="intro-copy">{{ site.description }}<br>歡迎來到 {{ site.author }} 的個人筆記。</p><div class="intro-links"><a class="primary-link" href="#articles">閱讀文章 ↓</a><a :href="withBase('/about.html')">關於我 ↗</a></div></div>
+          <div class="identity"><span class="mono">~/riku-blog</span><div class="monogram">RX<span>.</span></div><div class="identity-bottom"><span>{{ site.author }}</span><span class="mono">NOTES & IDEAS</span></div></div>
         </section>
         <a v-if="featured" class="featured" :href="withBase(featured.url)"><span class="eyebrow">PINNED / 精選文章</span><h2>{{ featured.title }}</h2><p>{{ featured.description }}</p><span class="mono">READ NOTE ↗</span></a>
         <section id="articles" class="articles"><div class="section-heading"><h2>文章<span class="count">{{ posts.length.toString().padStart(2,'0') }}</span></h2><span class="mono">THE LEARNING CONTINUES</span></div>

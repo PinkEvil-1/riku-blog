@@ -1,6 +1,6 @@
 export const site = {
-  title: 'Riku blog',
-  author: 'Riku / Brian',
+  title: 'Riku_Xin blog',
+  author: 'Riku_Xin',
   description: '記錄技術、實作與思考。',
   url: 'https://PinkEvil-1.github.io/riku-blog/',
   base: '/riku-blog/',

@@ -1,4 +1,4 @@
-# Riku blog
+# Riku_Xin blog
 
 Vue 3 + TypeScript + VitePress 個人部落格。海洋藍、深淺模式、自訂配色、Markdown、分類、標籤、搜尋、分頁、文章目錄、閱讀進度、RSS 與靜態 SEO。
 
