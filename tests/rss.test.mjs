@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { readFile, readdir } from 'node:fs/promises'
+import { access, readFile, readdir } from 'node:fs/promises'
 
 const output = new URL('../content/.vitepress/dist/', import.meta.url)
 const posts = new URL('../content/posts/', import.meta.url)
@@ -42,6 +42,9 @@ test('RSS links resolve to the generated feed under the deployment base', async 
 
 test('RSS items include full rendered article content', async () => {
   const feed = await readFile(new URL('feed.xml', output), 'utf8')
+  const channelUrl = feed.match(/<channel>.*?<link>(.*?)<\/link>/s)?.[1]
+  assert.ok(channelUrl, 'RSS channel must contain the website URL')
+  const siteUrl = new URL(channelUrl)
   const items = [...feed.matchAll(/<item>([\s\S]*?)<\/item>/g)].map(match => match[1])
   const articleFiles = (await readdir(posts)).filter(name => name.endsWith('.md'))
 
@@ -56,6 +59,20 @@ test('RSS items include full rendered article content', async () => {
 
     for (const [, attribute, value] of content.matchAll(/\b(href|src)="([^"]+)"/g)) {
       assert.match(value, /^(?:https?:|mailto:|tel:|data:|#)/, `${attribute} must be absolute or self-contained: ${value}`)
+
+      if (attribute !== 'src') continue
+      const assetUrl = new URL(value)
+      if (assetUrl.origin !== siteUrl.origin) continue
+      assert.ok(
+        assetUrl.pathname.startsWith(siteUrl.pathname),
+        `RSS image must stay under the deployment base: ${value}`,
+      )
+
+      const assetPath = decodeURIComponent(assetUrl.pathname.slice(siteUrl.pathname.length))
+      await assert.doesNotReject(
+        access(new URL(assetPath, output)),
+        `RSS image must exist in the build output: ${value}`,
+      )
     }
   }
 })

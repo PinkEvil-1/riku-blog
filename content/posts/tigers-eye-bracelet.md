@@ -17,7 +17,7 @@ featured: false
 但沒做功課怕買到假的, 沒有下手(雖然價格也不貴)  
 下面這個是網路上找來的圖片  
 [來源](https://www.dcard.tw/f/crystal/p/239986319)
-![這是圖片](../public/media/tigers-eye-bracelet/tigers-eye-bracelet.png "虎眼石手珠")  
+![這是圖片](/media/tigers-eye-bracelet/tigers-eye-bracelet.png "虎眼石手珠")
 
 為什麼要寫這篇呢?  
 其實我只是想測試嵌入圖片的功能啦!

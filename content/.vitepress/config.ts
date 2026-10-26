@@ -8,7 +8,9 @@ const cdata = (value: unknown) => String(value ?? '').replace(/]]>/g, ']]]]><![C
 const removeLeadingTitle = (html: string) => html.replace(/^\s*<h1\b[\s\S]*?<\/h1>\s*/i, '')
 const absoluteHtmlUrls = (html: string, pageUrl: string) => html.replace(/\b(href|src)="([^"]+)"/g, (match, attribute, value) => {
   if (/^(?:[a-z][a-z\d+.-]*:|#)/i.test(value)) return match
-  return `${attribute}="${new URL(value, pageUrl).href}"`
+  const baseUrl = value.startsWith('/') ? site.url : pageUrl
+  const path = value.startsWith('/') ? value.slice(1) : value
+  return `${attribute}="${new URL(path, baseUrl).href}"`
 })
 export default defineConfig({
   title: site.title,
