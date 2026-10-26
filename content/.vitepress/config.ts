@@ -5,6 +5,7 @@ import { site } from './site'
 
 const xml = (value: unknown) => String(value ?? '').replace(/[<>&"']/g, c => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;', "'": '&apos;' }[c]!))
 const cdata = (value: unknown) => String(value ?? '').replace(/]]>/g, ']]]]><![CDATA[>')
+const removeLeadingTitle = (html: string) => html.replace(/^\s*<h1\b[\s\S]*?<\/h1>\s*/i, '')
 const absoluteHtmlUrls = (html: string, pageUrl: string) => html.replace(/\b(href|src)="([^"]+)"/g, (match, attribute, value) => {
   if (/^(?:[a-z][a-z\d+.-]*:|#)/i.test(value)) return match
   return `${attribute}="${new URL(value, pageUrl).href}"`
@@ -47,7 +48,7 @@ export default defineConfig({
     const posts = await createContentLoader('posts/*.md', { render: true }).load()
     const items = posts.sort((a,b) => String(b.frontmatter.date).localeCompare(String(a.frontmatter.date))).map(p => {
       const url = new URL(p.url.replace(/^\//, ''), site.url).href
-      const content = absoluteHtmlUrls(p.html || '', url)
+      const content = absoluteHtmlUrls(removeLeadingTitle(p.html || ''), url)
       return `<item><title>${xml(p.frontmatter.title)}</title><link>${xml(url)}</link><guid>${xml(url)}</guid><pubDate>${new Date(p.frontmatter.date).toUTCString()}</pubDate><description>${xml(p.frontmatter.description)}</description><content:encoded><![CDATA[${cdata(content)}]]></content:encoded></item>`
     }).join('')
     await writeFile(join(config.outDir, 'feed.xml'), `<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>${xml(site.title)}</title><link>${xml(site.url)}</link><description>${xml(site.description)}</description><language>zh-TW</language>${items}</channel></rss>`)

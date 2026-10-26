@@ -1,7 +1,7 @@
 ---
 title: 長大就是學習跟自己的身體的相處模式
 date: '2026-10-26'
-description: 該如何發現身體的警訊與問題
+description: 發現身體的警訊與問題
 category: 記錄
 tags: [Blog]
 featured: false
@@ -31,6 +31,8 @@ featured: false
 ### 健身  
 身體的協調, 如何拉伸, 做出正確的動作等  
 發覺自己的聳肩習慣  
+髖卡住的問題, 需要青蛙腿拉伸  
+握推時發現腰有輕微沾黏, 教練按摩後已處理掉  
 
 ---
 
