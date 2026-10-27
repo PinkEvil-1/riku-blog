@@ -1,6 +1,7 @@
 import { defineConfig, createContentLoader } from 'vitepress'
 import { writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
+import footnote from 'markdown-it-footnote'
 import { site } from './site'
 
 const xml = (value: unknown) => String(value ?? '').replace(/[<>&"']/g, c => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;', "'": '&apos;' }[c]!))
@@ -19,6 +20,11 @@ export default defineConfig({
   base: site.base,
   cleanUrls: false,
   appearance: true,
+  markdown: {
+    config(md) {
+      md.use(footnote)
+    }
+  },
   sitemap: { hostname: site.url },
   head: [
     ['link', { rel: 'icon', href: `${site.base}favicon.svg` }],
